@@ -11,7 +11,24 @@ use serde_json::Value;
 /// # Returns
 /// * `()`
 pub fn process(selector: &String, run_state: &mut RunState) {
-    let document = Html::parse_document(&run_state.data_state.to_string());
+    if run_state.data_state.is_null() {
+        return;
+    }
+
+    let mut raw_html = String::new();
+
+    if run_state.data_state.is_object() && !run_state.data_state.get("html").is_none() {
+        raw_html = run_state.data_state.get("html").unwrap().to_string();
+        raw_html = raw_html[1..raw_html.len() - 1].to_string();
+        raw_html = raw_html
+            .replace("\\n", "\n")
+            .replace("\\t", "\t")
+            .replace("\\\"", "\"");
+    } else {
+        return;
+    }
+
+    let document = Html::parse_document(raw_html.as_str());
     let parsed_selector = Selector::parse(selector).unwrap();
 
     // Store the HTML selected elements as HTML

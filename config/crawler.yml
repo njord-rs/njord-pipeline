@@ -9,7 +9,7 @@ tasks:
     name: byui_html
     steps:
       - type: html_query
-        selector: ".DevotionalPage-wrapper"
+        selector: .DevotionalPage-wrapper
 
 
 outputs:
