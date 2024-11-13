@@ -15,7 +15,7 @@ pub fn process(selector: &String, run_state: &mut RunState) {
         return;
     }
 
-    let mut raw_html = String::new();
+    let mut raw_html: String;
 
     if run_state.data_state.is_object() && !run_state.data_state.get("html").is_none() {
         raw_html = run_state.data_state.get("html").unwrap().to_string();
