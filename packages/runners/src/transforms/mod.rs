@@ -16,6 +16,8 @@ pub fn transform(config: Config, run_state: &mut RunState) {
     set_variables(&config, run_state);
 
     for task in config.tasks {
+        let task_name = task.name.clone().unwrap_or_default();
+        print!("Processing task: {}", task_name);
         if !set_source_data(&task.source, run_state) {
             continue;
         }
@@ -28,7 +30,12 @@ pub fn transform(config: Config, run_state: &mut RunState) {
                 .insert(output, run_state.data_state.clone());
         }
 
-        task_data_state.insert(task.name, run_state.data_state.clone());
+        task_data_state.insert(task_name, run_state.data_state.clone());
+
+        // Print a checkmark in green
+        print!("\x1b[32m");
+        print!("\t✔︎\n");
+        print!("\x1b[0m");
     }
 }
 

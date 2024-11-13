@@ -7,6 +7,11 @@ sources:
     name: gadgets
     path: "./config/Gadgets Temperature Data.csv"
 
+  # - type: http
+  #   name: byui
+  #   url: https://www.byui.edu/speeches/announcement-ricks-college-to-become-byu-idaho
+  #   format: html
+
 variables:
   average_temp: 0
 
@@ -32,11 +37,11 @@ tasks:
             condition: "{{average_temp}} >= {{item.min_temperature}} && {{average_temp}} <= {{item.max_temperature}}"
             true_steps:
               - type: add_field
-                field: "is_average_temp_in_range"
+                field: "can_handle_temperature"
                 value: true
             false_steps:
               - type: add_field
-                field: "is_average_temp_in_range"
+                field: "can_handle_temperature"
                 value: false
 
 outputs:
