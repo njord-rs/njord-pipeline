@@ -19,11 +19,33 @@ pub async fn process_http_source(
         "json" => {
             let json = process_json(&response)?;
             Ok(json)
-        }
+        },
+        "html" => {
+            let html = process_html(&response);
+            Ok(HashMap::from([("html".to_string(), html)]))
+        },
         _ => Ok(HashMap::new()),
     }
 }
 
+/// Process JSON data
+///
+/// # Arguments
+/// * `json` - JSON data to process
+///
+/// # Returns
+/// * `Result<HashMap<String, Value>, serde_json::Error>`
 fn process_json(json: &str) -> Result<HashMap<String, Value>, serde_json::Error> {
     serde_json::from_str(json)
+}
+
+/// Process HTML data
+///
+/// # Arguments
+/// * `html` - HTML data to process
+///
+/// # Returns
+/// * `Value`
+fn process_html(html: &str) -> Value {
+    Value::String(html.to_string())
 }

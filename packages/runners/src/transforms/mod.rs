@@ -2,6 +2,7 @@ pub mod add_field;
 pub mod condition;
 pub mod convert;
 pub mod json_query;
+pub mod html_query;
 pub mod r#loop;
 pub mod math;
 
@@ -52,6 +53,7 @@ pub fn process_steps(steps: &[Step], run_state: &mut RunState) {
     for step in steps {
         match step {
             Step::JsonQuery { query } => transforms::json_query::process(query, run_state),
+            Step::HtmlQuery { selector } => transforms::html_query::process(selector, run_state),
             Step::Math {
                 operation,
                 decimals,
@@ -74,7 +76,7 @@ pub fn process_steps(steps: &[Step], run_state: &mut RunState) {
 ///
 /// # Arguments
 ///
-/// * `config` - The configuration object   
+/// * `config` - The configuration object
 /// * `run_state` - The run state
 ///
 /// # Returns

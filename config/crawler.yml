@@ -1,0 +1,18 @@
+sources:
+  - type: http
+    name: byui
+    url: https://www.byui.edu/speeches/inaugurations/inaugural-response-david-a-bednar
+    format: html
+
+tasks:
+  - source: byui
+    name: byui_html
+    steps:
+      - type: html_query
+        selector: ".DevotionalPage-wrapper"
+
+
+outputs:
+  - type: file
+    name: byui
+    path: "./config/byui.html"

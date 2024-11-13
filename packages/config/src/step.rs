@@ -7,6 +7,8 @@ use serde_yaml::Value;
 pub enum Step {
     #[serde(rename = "json_query")]
     JsonQuery { query: String },
+    #[serde(rename = "html_query")]
+    HtmlQuery { selector: String },
     #[serde(rename = "math")]
     Math {
         operation: String,
