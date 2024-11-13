@@ -1,0 +1,27 @@
+sources:
+  - type: http
+    name: weather
+    url: https://api.open-meteo.com/v1/forecast?latitude=43.826921,&longitude=-111.781215&current=temperature_2m,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m&temperature_unit=fahrenheit
+  - type: file
+    name: gadgets
+    path: "./config/Gadgets Temperature Data.csv"
+
+tasks:
+  - source: weather
+    name: avg_temp
+    steps:
+      - type: json_query
+        query: /HttpResult/hourly/temperature_2m
+      - type: math
+        operation: average
+
+  - source: gadgets
+    name: gadgets_json
+    steps:
+      - type: convert
+        from: csv
+
+outputs:
+  - type: file
+    path: ./config/results.json
+    format: json
