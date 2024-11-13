@@ -1,1 +1,62 @@
-[]
+[
+  {
+    "gadget": "iPhone",
+    "is_average_temp_in_range": false,
+    "max_temperature": 95.0,
+    "min_temperature": 32.0
+  },
+  {
+    "gadget": "Galaxy S21",
+    "is_average_temp_in_range": true,
+    "max_temperature": 100.0,
+    "min_temperature": 0.0
+  },
+  {
+    "gadget": "Pixel 7",
+    "is_average_temp_in_range": true,
+    "max_temperature": 92.0,
+    "min_temperature": 30.0
+  },
+  {
+    "gadget": "iPad",
+    "is_average_temp_in_range": false,
+    "max_temperature": 85.0,
+    "min_temperature": 40.0
+  },
+  {
+    "gadget": "MacBook",
+    "is_average_temp_in_range": false,
+    "max_temperature": 105.0,
+    "min_temperature": 50.0
+  },
+  {
+    "gadget": "Surface Pro",
+    "is_average_temp_in_range": false,
+    "max_temperature": 98.0,
+    "min_temperature": 45.0
+  },
+  {
+    "gadget": "Dell XPS",
+    "is_average_temp_in_range": false,
+    "max_temperature": 99.0,
+    "min_temperature": 48.0
+  },
+  {
+    "gadget": "Sony Xperia",
+    "is_average_temp_in_range": false,
+    "max_temperature": 94.0,
+    "min_temperature": 33.0
+  },
+  {
+    "gadget": "OnePlus 11",
+    "is_average_temp_in_range": false,
+    "max_temperature": 97.0,
+    "min_temperature": 34.0
+  },
+  {
+    "gadget": "Huawei P50",
+    "is_average_temp_in_range": true,
+    "max_temperature": 96.0,
+    "min_temperature": 31.0
+  }
+]

@@ -6,7 +6,7 @@ use serde_json::Value;
 /// # Arguments
 /// * `query` - A JSON pointer string to query the data.
 /// * `run_state` - A mutable reference to the current run state.
-pub fn json_query(query: String, run_state: &mut RunState) {
+pub fn process(query: &String, run_state: &mut RunState) {
     run_state.data_state = run_state
         .data_state
         .pointer(&query)

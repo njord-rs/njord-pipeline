@@ -1,4 +1,15 @@
+use std::collections::HashMap;
+
+use output::Output;
 use serde::Deserialize;
+use serde_yaml::Value;
+use source::Source;
+use task::Task;
+
+pub mod output;
+pub mod source;
+pub mod step;
+pub mod task;
 
 /// Configuration for the data pipeline
 #[derive(Debug, Deserialize, Clone)]
@@ -11,70 +22,9 @@ pub struct Config {
 
     /// The list of tasks in the data pipeline
     pub tasks: Vec<Task>,
-}
 
-/// Represents a single data source
-#[derive(Debug, Deserialize, Clone)]
-#[serde(tag = "type")]
-pub enum Source {
-    /// HTTP source
-    #[serde(rename = "http")]
-    Http {
-        url: String,
-        #[serde(default = "default_format")]
-        format: String,
-        name: String,
-    },
-
-    /// File source
-    #[serde(rename = "file")]
-    File { path: String, name: String },
-}
-
-/// Output configuration
-#[derive(Debug, Deserialize, Clone)]
-#[serde(tag = "type")]
-pub enum Output {
-    #[serde(rename = "file")]
-    File {
-        path: String,
-        #[serde(default = "default_format")]
-        format: String,
-    },
-}
-
-impl Output {
-    /// Returns the name of the output
-    pub fn name(&self) -> &str {
-        match self {
-            Output::File { .. } => "file",
-        }
-    }
-}
-
-/// The different steps in the data pipeline
-#[derive(Debug, Deserialize, Clone)]
-#[serde(tag = "type")]
-pub enum Step {
-    #[serde(rename = "json_query")]
-    JsonQuery { query: String },
-    #[serde(rename = "math")]
-    Math { operation: String },
-    #[serde(rename = "convert")]
-    Convert { from: String },
-}
-
-/// The different tasks
-#[derive(Debug, Deserialize, Clone)]
-pub struct Task {
-    pub name: String,
-    pub source: String,
-    pub steps: Vec<Step>,
-}
-
-/// Provides the default value for the `format` field
-fn default_format() -> String {
-    "json".to_string()
+    #[serde(default)]
+    pub variables: HashMap<String, Value>,
 }
 
 impl Config {
