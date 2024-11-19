@@ -39,8 +39,21 @@ impl Config {
         let config = std::fs::read_to_string(file_path)
             .map_err(|e| format!("Failed to read config file: {}", e))?;
 
-        let config: Config = serde_yaml::from_str(&config)?;
+        // If filepath is YAML, parse as YAML
+        if file_path.ends_with(".yaml") || file_path.ends_with(".yml") {
+            return Ok(serde_yaml::from_str(&config)?);
+        }
 
-        Ok(config)
+        // If filepath is JSON, parse as JSON
+        if file_path.ends_with(".json") {
+            return Ok(serde_json::from_str(&config)?);
+        }
+
+        // If filepath is TOML, parse as TOML
+        if file_path.ends_with(".toml") {
+            return Ok(toml::from_str(&config)?);
+        }
+
+        Err("Unsupported config file format".into())
     }
 }
